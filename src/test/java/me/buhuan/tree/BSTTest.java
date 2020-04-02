@@ -14,4 +14,23 @@ public class BSTTest {
 		bst.put("b", "c");
 		System.out.println(bst);
 	}
+
+	@Test
+	public void floorTest() {
+		BST<String, String> bst = new BST<>();
+		bst.put("a", "b");
+		bst.put("c", "b");
+		bst.put("d", "c");
+		System.out.println(bst.floor("b"));
+	}
+
+	@Test
+	public void deleteTest() {
+		BST<String, String> bst = new BST<>();
+		bst.put("a", "b");
+		bst.put("c", "b");
+		bst.put("d", "c");
+		bst.delete("c");
+		System.out.println(bst);
+	}
 }
