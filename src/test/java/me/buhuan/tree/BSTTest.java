@@ -7,30 +7,36 @@ import org.junit.jupiter.api.Test;
  * @date 2020/4/2
  */
 public class BSTTest {
+
+	private static BST<String, String> bst = new BST<>();
+	static  {
+		bst.put("a", "b");
+		bst.put("t", "c");
+		bst.put("b", "b");
+		bst.put("g", "c");
+		bst.put("h", "b");
+		bst.put("q", "c");
+	}
+
 	@Test
 	public void test() {
-		BST<String, String> bst = new BST<>();
-		bst.put("a", "b");
-		bst.put("b", "c");
 		System.out.println(bst);
 	}
 
 	@Test
 	public void floorTest() {
-		BST<String, String> bst = new BST<>();
-		bst.put("a", "b");
-		bst.put("c", "b");
-		bst.put("d", "c");
 		System.out.println(bst.floor("b"));
 	}
 
 	@Test
 	public void deleteTest() {
-		BST<String, String> bst = new BST<>();
-		bst.put("a", "b");
-		bst.put("c", "b");
-		bst.put("d", "c");
 		bst.delete("c");
 		System.out.println(bst);
 	}
+
+	@Test
+	public void keysTest() {
+		System.out.println(bst.keys());
+	}
+
 }

@@ -1,5 +1,7 @@
 package me.buhuan.tree;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.logging.Level;
 
 /**
@@ -89,6 +91,17 @@ public class BST <K extends Comparable<K>, V> {
 			return node;
 		}
 		return min(node.left);
+	}
+
+	public K max() {
+		return max(root).k;
+	}
+
+	private Node max(Node node) {
+		if (node.right == null) {
+			return node;
+		}
+		return max(node.right);
 	}
 
 	public K floor(K k) {
@@ -227,6 +240,33 @@ public class BST <K extends Comparable<K>, V> {
 		node.n = size(node.left) + size(node.right) + 1;
 
 		return node;
+	}
+
+	public Iterable<K> keys() {
+		return keys(min(), max());
+	}
+
+	public Iterable<K> keys(K lo, K hi) {
+		Queue<K> queue = new ArrayDeque<>();
+		keys(root, queue, lo, hi);
+		return queue;
+	}
+
+	private void keys(Node node, Queue<K> queue, K lo, K hi) {
+		if (node == null) {
+			return;
+		}
+		int cmpLo = lo.compareTo(node.k);
+		int cmpHi = hi.compareTo(node.k);
+		if (cmpLo < 0) {
+			keys(node.left, queue, lo, hi);
+		}
+		if (cmpLo <= 0 && cmpHi >= 0) {
+			queue.offer(node.k);
+		}
+		if (cmpHi > 0) {
+			keys(node.right, queue, lo, hi);
+		}
 	}
 
 	@Override
